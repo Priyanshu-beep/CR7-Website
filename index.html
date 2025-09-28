@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cristiano Ronaldo | CR7</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <h1>CR7</h1>
+  </div>
+
+  <!-- Navigation -->
+  <header>
+    <div class="logo">
+      <a href="#home">
+        <img src="Img/logo.png" alt="CR7 Logo">
+      </a>
+    </div>
+    <ul class="nav">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#career">Career</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#ranking">Ranking</a></li>
+      <li><a href="#performance">Performance</a></li>
+    </ul>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="hero polygon-right">
+    <div class="container fade-left">
+      <h2>Cristiano Ronaldo</h2>
+      <p>Welcome to the CR7 fan site! Explore his career, teams, rankings, and legendary performances.</p>
+      <a href="#">Subscribe</a>
+    </div>
+    <div class="mainimg fade-right">
+      <img src="Img/Body.jpg" alt="Cristiano Ronaldo">
+    </div>
+  </section>
+
+  <!-- Career Section -->
+  <section id="career" class="content polygon-left">
+    <div class="text-box fade-right">
+      <h2>Career</h2>
+      <p>Cristiano Ronaldo’s journey began at Sporting CP, then Manchester United, Real Madrid, Juventus, and now Al Nassr. He also captains Portugal.</p>
+    </div>
+    <div class="mainimg fade-left">
+      <img src="Img/all clubs.jpg" alt="Ronaldo All Clubs">
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="content polygon-right">
+    <div class="text-box fade-left">
+      <h2>Teams</h2>
+      <p>Ronaldo has played for the biggest clubs in football, delivering success and inspiring millions worldwide.</p>
+    </div>
+    <div class="mainimg fade-right">
+      <img src="Img/CR800.jpg" alt="CR800 Ronaldo Milestone">
+    </div>
+  </section>
+
+  <!-- Ranking Section -->
+  <section id="ranking" class="content polygon-left">
+    <div class="text-box fade-right">
+      <h2>Rankings</h2>
+      <p>Ronaldo is consistently ranked among the greatest players, winning Ballon d’Ors, Golden Boots, and breaking international scoring records.</p>
+    </div>
+    <div class="mainimg fade-left">
+      <img src="Img/all clubs 2.jpg" alt="Ronaldo Clubs Poster">
+    </div>
+  </section>
+
+  <!-- Performance Section -->
+  <section id="performance" class="content polygon-right">
+    <div class="text-box fade-left">
+      <h2>Performances</h2>
+      <p>From clutch goals to legendary finals, Ronaldo’s performances remain some of the most iconic moments in football history.</p>
+    </div>
+    <div class="mainimg fade-right">
+      <img src="Img/BallonDor.jpg" alt="Ballon D'Or">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <ul class="social">
+      <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+      <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+    </ul>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Preloader
+    window.addEventListener("load", () => {
+      document.getElementById("preloader").style.display = "none";
+    });
+    setTimeout(() => {
+      document.getElementById("preloader").style.display = "none";
+    }, 5000);
+
+    // Navbar active highlight
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav a");
+    window.onscroll = () => {
+      let current = "";
+      sections.forEach(sec => {
+        if(window.scrollY >= sec.offsetTop - 80){
+          current = sec.getAttribute("id");
+        }
+      });
+      navLinks.forEach(a => {
+        a.classList.remove("active");
+        if(a.getAttribute("href") === "#" + current){
+          a.classList.add("active");
+        }
+      });
+    };
+
+    // Navbar shrink effect
+    const header = document.querySelector("header");
+    window.addEventListener("scroll", () => {
+      if(window.scrollY > 80){
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+
+    // Scroll animations
+    const faders = document.querySelectorAll(".fade-left, .fade-right");
+    const appearOptions = { threshold: 0.2 };
+    const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.classList.add("appear");
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+
+    // Glow line parallax
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      document.querySelectorAll("section").forEach((sec, index) => {
+        let direction = (index % 2 === 0) ? -1 : 1; // odd → left, even → right
+        let glowShift = (scrollY * 0.15) * direction; // slowed down
+        sec.style.setProperty("--glow-shift", `${glowShift}px`);
+      });
+    });
+  </script>
+</body>
+</html>
